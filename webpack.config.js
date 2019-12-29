@@ -26,20 +26,6 @@ const config = {
                 test: /\.jsx?$/,
                 loader: 'babel-loader',
                 exclude: /node_modules/,
-                options: {
-                    presets: ['@babel/preset-react', '@babel/preset-env'],
-                    plugins: [
-                        [
-                            'babel-plugin-import',
-                            {
-                                libraryName: 'antd',
-                                libraryDirectory: 'es',
-                                style: 'css',
-                            },
-                        ],
-                        '@babel/plugin-proposal-object-rest-spread',
-                    ],
-                },
             },
             {
                 test: /\.css$/,
@@ -90,6 +76,16 @@ if (isProd) {
         historyApiFallback: true,
         publicPath: '/', // 默认是'/'
         host: '0.0.0.0',
+        proxy: {
+            '/ev': {
+                target: 'http://evboe.bytedance.net',
+                changeOrigin: true,
+            },
+            '/admin': {
+                target: 'http://evboe.bytedance.net',
+                changeOrigin: true,
+            }
+        }
     };
 }
 

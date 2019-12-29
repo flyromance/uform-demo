@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-    SchemaForm,
     Field,
     FormButtonGroup,
     Submit,
@@ -13,6 +12,8 @@ import {
     createFormActions,
     FormSlot,
     FormTextBox,
+    FormSpy,
+    SchemaForm,
 } from '@uform/antd';
 import { Button } from 'antd';
 
@@ -26,6 +27,15 @@ export default function Simple() {
                 labelCol={7}
                 wrapperCol={12}
             >
+                <FormSpy>
+                    {({ state, form }) => {
+                        return (
+                            <div>
+                                name: {form.getFieldValue('radio')}
+                            </div>
+                        );
+                    }}
+                </FormSpy>
                 <Field
                     type='radio'
                     enum={[{ value: '1', label: 'xxx' }, '2', '3', '4']}

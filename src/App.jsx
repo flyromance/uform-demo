@@ -6,18 +6,28 @@ import {
     Link,
     withRouter,
 } from 'react-router-dom';
-
+import { matchPath } from 'react-router';
+window.matchPath = matchPath;
 import Sider from './component/Sider';
-import Home from './pages/Home';
-import Simple from './pages/Simple';
-import List from './pages/List';
-import Schema from './pages/Schema';
-import Action from './pages/Action';
+import routes from './routes';
 
 import './app.css';
 import 'antd/dist/antd.css';
 
+import './fields';
+
 const WrapperSider = withRouter(Sider);
+
+function User1(props) {
+    return <div>this is {props.match.params.username}</div>;
+}
+
+function User(props) {
+    return <div>
+        Hello this is user page!!
+        <Route path={'/user/:username'} component={User1} />
+    </div>;
+}
 
 export default function App() {
     return (
@@ -29,22 +39,20 @@ export default function App() {
                         <WrapperSider aa />
                     </div>
                     <div className='p-content'>
+                        <Route path='/user' component={User} />
                         <Switch>
-                            <Route exact path='/' component={Home} />
-                            <Route exact path='/simple' component={Simple} />
-                            <Route exact path='/list' component={List} />
-                            <Route exact path='/schema' component={Schema} />
-                            <Route exact path='/action' component={Action} />
-                            <Route>
-                                {props => {
+                            {routes.map(
+                                ({ path, component, exact, ...rest }) => {
                                     return (
-                                        <div>
-                                            {props.location.pathname} not
-                                            exists;
-                                        </div>
+                                        <Route
+                                            key={path}
+                                            exact={true}
+                                            path={path}
+                                            component={component}
+                                        />
                                     );
-                                }}
-                            </Route>
+                                }
+                            )}
                         </Switch>
                     </div>
                 </div>
