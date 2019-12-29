@@ -27,32 +27,22 @@ export default function Simple() {
                 labelCol={7}
                 wrapperCol={12}
             >
-                <FormSpy>
+                <Field
+                    type='string'
+                    title='string'
+                    name='string'
+                />
+                {/* <FormSpy>
                     {({ state, form }) => {
-                        return (
-                            <div>
-                                name: {form.getFieldValue('radio')}
-                            </div>
-                        );
+                        return <div>name: {form.getFieldValue(string)}</div>;
                     }}
-                </FormSpy>
+                </FormSpy> */}
                 <Field
                     type='radio'
                     enum={[{ value: '1', label: 'xxx' }, '2', '3', '4']}
                     title='Radio'
                     name='radio'
                 />
-                <FormBlock title='基础信息'>
-                    <FormSlot>
-                        <div>这是一个随意插入的内容</div>
-                    </FormSlot>
-                </FormBlock>
-                <FormCard title='card'>
-                    <FormSlot>
-                        <div>这是一个随意插入的内容</div>
-                    </FormSlot>
-                </FormCard>
-
                 <Field
                     type='string'
                     enum={['1', '2', '3', '4']}
@@ -93,16 +83,6 @@ export default function Simple() {
                     name='range'
                     x-props={{ min: 0, max: 1024, marks: [0, 1024] }}
                 />
-                <FormItemGrid gutter={10} cols={[6, 11]} title='sssss'>
-                    ​
-                    <Field
-                        name='ddd1'
-                        default={123}
-                        type='number'
-                        title='xxxx'
-                    />
-                    ​<Field name='[startDate,endDate]' type='daterange' />​
-                </FormItemGrid>
                 <FormButtonGroup offset={7} sticky>
                     <Submit />
                     <Reset />
@@ -122,18 +102,6 @@ export default function Simple() {
                         }}
                     >
                         上传文件
-                    </Button>
-                    <Button
-                        onClick={() => {
-                            actions.setFormState(state => {
-                                state.values = {
-                                    radio: '4',
-                                    checkbox: ['2', '3'],
-                                };
-                            });
-                        }}
-                    >
-                        改变radio的值
                     </Button>
                 </FormButtonGroup>
             </SchemaForm>
